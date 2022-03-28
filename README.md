@@ -22,3 +22,7 @@ Step 5:
 # WARNING
 
 Use large images at your own risk.
+
+# Python version
+
+Python version 3.10.4
