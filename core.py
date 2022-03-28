@@ -3,26 +3,54 @@ readmode=True
 from PIL import Image
 import numpy as np
 import pandas as pd
-# import openpyxl
 import xlsxwriter
 
 
 # definirajmo slikovno datoteko s katero bomo manipulirali
 image = input("Vpišite ime slikovne datoteke: ")
 
-# preverimo če sploh datoteka obstaja in uporabnika ponovno prosimo za vnos, če je bil napačen
+# preverimo če sploh datoteka obstaja in uporabnika ponovno prosimo za vnos, če je bil napačen. Konvertiramo tudi barve v RGB (24 bit).
 while readmode:
     try:
         image = Image.open(image).convert('RGB')
         readmode = False
+        
 
     except:
         print("Ne najdem", image)
         print("Prosim, poskusite ponovno. ")
         image = input("Vpišite ime slikovne datoteke (tudi končnico): ")
 
-# ugotovimo dimenzije slike
-# https://stackoverflow.com/questions/6444548/how-do-i-get-the-picture-size-with-pil
+
+# če je slika razmeroma velika, uporabniku damo možnost da jo zmanjša na širino 300 pikslov in ohrani razmerje
+while max(image.size) > 300:
+    question = input("Slikovna datoteka je velika in bo zahtevna za obdelavo. Jo želite zmanjšati? da / ne: ")
+    if question == ("ne"):
+        break
+    while question == ("da"):
+        basewidth = 300
+        wpercent = (basewidth/float(image.size[0]))
+        hsize = int((float(image.size[1])*float(wpercent)))
+        image = image.resize((basewidth,hsize), Image.ANTIALIAS)
+
+        # uporabniku damo možnost da shrani pomanjsano verzijo slike za referenco
+        question_save = input("Želite shraniti pomanjšano verzijo slike? da / ne: ")
+        if question_save == ("ne"):
+            break
+        elif question_save == ("da"):
+            small_image = input("Kako želite poimenovati pomanjšano sliko (brez končnice)? ")
+            imgform = ".png"
+            small_image_form = small_image+imgform
+            image.save(small_image_form)
+            break
+        else:
+            print("Prosim odgovorite z 'da' ali 'ne'")
+        
+    else:
+        print("Prosim odgovorite z 'da' ali 'ne'")
+
+
+# shranimo dimenzije slike
 width, height = image.size
 
 # širino množimo s 3, ker imamo RGB - tri vrednosti za eno celico
@@ -56,7 +84,6 @@ worksheet = writer.sheets['Sheet69']
 # zapišemo dimenzije dataframe-a.
 (max_row, max_col) = df.shape
 
-# df.to_excel(str(save_file_name) + ".xlsx", sheet_name='Sheet1') -> brez barvanja se lahko shrani xlsx s tem
 
 # definirajmo array, ki ga kasneje uporabimo v zanki za RGB
 rgb = ["#ff0000", "#00ff00", "#0000ff"]
@@ -76,5 +103,3 @@ worksheet.set_zoom(32)
 
 # funkcija, ki shrani xlsx datoteko v trenutno mapo
 writer.save()
-
-# print(df)
