@@ -49,6 +49,9 @@ while max(image.size) > 300:
         
     else:
         print("Prosim odgovorite z 'da' ali 'ne'")
+    
+    # break vstavimo zaradi slik, ki so vertikalnega formata in bo po zmanjšanju širine višina vseeno večja od 300px
+    break
 
 
 # shranimo dimenzije slike
@@ -103,5 +106,4 @@ worksheet.hide_gridlines(2)
 worksheet.set_zoom(32)
 
 # funkcija, ki shrani xlsx datoteko v podmapo "xlsx_datoteke"
-xlsx_path = "./xlsx_datoteke"
 writer.save()
