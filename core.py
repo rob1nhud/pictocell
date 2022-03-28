@@ -41,7 +41,8 @@ while max(image.size) > 300:
             small_image = input("Kako želite poimenovati pomanjšano sliko (brez končnice)? ")
             imgform = ".png"
             small_image_form = small_image+imgform
-            image.save(small_image_form)
+            small_image_path = "./pomanjsane_slike"
+            image.save(f"{small_image_path}/{small_image_form}")
             break
         else:
             print("Prosim odgovorite z 'da' ali 'ne'")
@@ -72,7 +73,7 @@ save_file_name = input("Prosim vpišite ime datoteke, ki jo želite ustvariti (B
 
 # ustvari Pandas Excel writer z XlsxWriter kot orodje
 # vir: https://xlsxwriter.readthedocs.io/example_pandas_conditional.html
-writer = pd.ExcelWriter(str(save_file_name) + ".xlsx", engine='xlsxwriter')
+writer = pd.ExcelWriter("./xlsx_datoteke/" + str(save_file_name) + ".xlsx", engine='xlsxwriter')
 
 # konvertira dataframe v XlsxWriter Excel objekt.
 df.to_excel(writer, sheet_name='Sheet69')
@@ -101,5 +102,6 @@ worksheet.hide_row_col_headers()
 worksheet.hide_gridlines(2)
 worksheet.set_zoom(32)
 
-# funkcija, ki shrani xlsx datoteko v trenutno mapo
+# funkcija, ki shrani xlsx datoteko v podmapo "xlsx_datoteke"
+xlsx_path = "./xlsx_datoteke"
 writer.save()
