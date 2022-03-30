@@ -28,6 +28,7 @@ while max(image.size) > 300:
     if question == ("ne"):
         break
     while question == ("da"):
+        # če vaš računalnik res ni zmogljiv spremenite spodnjo vrednost "basewidth" s 300 na 100 in v 26. vrstici spremenite vrednost 300 na 100
         basewidth = 300
         wpercent = (basewidth/float(image.size[0]))
         hsize = int((float(image.size[1])*float(wpercent)))

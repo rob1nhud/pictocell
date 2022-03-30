@@ -17,11 +17,15 @@ Step 4:
   
 Step 5:
   Open the .xlsx file in your favourite spreadsheet program and enjoy :)
+
+I suggest using OpenOffice Calc to open created .xlsx files
   
 
 # WARNING
 
 Use large images at your own risk.
+
+If your PC is really slow and cannot open the created .xlsx file, change value 300 to 100 in line 26 and 32 in core.py
 
 # Python version
 
