@@ -32,7 +32,7 @@ while max(image.size) > 300:
         basewidth = 300
         wpercent = (basewidth/float(image.size[0]))
         hsize = int((float(image.size[1])*float(wpercent)))
-        image = image.resize((basewidth,hsize), Image.ANTIALIAS)
+        image = image.resize((basewidth,hsize), Image.Resampling.LANCZOS)
 
         # uporabniku damo možnost da shrani pomanjsano verzijo slike za referenco
         question_save = input("Želite shraniti pomanjšano verzijo slike? da / ne: ")
