@@ -54,6 +54,14 @@ while max(image.size) > 300:
     # break vstavimo zaradi slik, ki so vertikalnega formata in bo po zmanjšanju širine višina vseeno večja od 300px
     break
 
+# "set" je podobno kot "list" (array), vendar ne ohrani zaporedja in shrani samo unikatne elemente
+unique_colors = set()
+for i in range(image.size[0]):
+    for j in range(image.size[1]):
+        pixel = image.getpixel((i, j))
+        unique_colors.add(pixel)
+
+print('Unikatnih barv je ', len(unique_colors))
 
 # shranimo dimenzije slike
 width, height = image.size
