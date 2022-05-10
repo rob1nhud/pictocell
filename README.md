@@ -18,7 +18,7 @@ Step 4:
 Step 5:
   Open the .xlsx file in your favourite spreadsheet program and enjoy :)
 
-I suggest using OpenOffice Calc to open created .xlsx files
+I suggest using LibreOffice Calc to open created .xlsx files
   
 
 # WARNING
